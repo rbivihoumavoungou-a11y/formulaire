@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wisdom Delivery Service | Commande en ligne</title>
+    <style>
+        :root { 
+            --navy: #0a192f; 
+            --bronze: #cd7f32; 
+            --light: #f4f4f4; 
+        }
+        
+        body { 
+            font-family: 'Arial', sans-serif; 
+            margin: 0; 
+            line-height: 1.6; 
+            color: var(--navy); 
+            background-color: #fff;
+            position: relative;
+        }
+
+        /* Image d'arrière-plan en filigrane (basée sur l'image d'origine) */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/jpeg;base64,***INSEREZ_ICI_L_IMAGE_EN_BASE64_OU_UNE_URL***');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1; /* Effet de filigrane */
+            z-index: -1;
+        }
+        
+        header { 
+            background: var(--navy); 
+            color: white; 
+            padding: 20px; 
+            text-align: center; 
+            border-bottom: 3px solid var(--bronze); 
+            position: relative;
+        }
+        
+        .container { 
+            max-width: 800px; 
+            margin: auto; 
+            padding: 20px; 
+            position: relative;
+        }
+        
+        .order-form { 
+            background: rgba(255, 255, 255, 0.9); /* Fond légèrement transparent pour le formulaire */
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            margin-top: -50px; 
+        }
+        
+        .hero { 
+            background: var(--navy); 
+            color: white; 
+            padding: 60px 20px; 
+            text-align: center; 
+        }
+        
+        label { 
+            display: block; 
+            margin: 10px 0 5px; 
+            font-weight: bold; 
+        }
+        
+        input, select, textarea { 
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 15px; 
+            border: 1px solid #ccc; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+        }
+        
+        .btn-submit { 
+            background: var(--bronze); 
+            color: white; 
+            border: none; 
+            padding: 15px; 
+            width: 100%; 
+            border-radius: 8px; 
+            font-size: 18px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            transition: 0.3s; 
+        }
+        .btn-submit:hover { 
+            background: #b06d2a; 
+        }
+
+        .contact-info { 
+            text-align: center; 
+            margin-top: 40px; 
+            padding: 20px; 
+            background: rgba(244, 244, 244, 0.9); 
+            border-radius: 10px; 
+        }
+        .whatsapp-link { 
+            color: #25D366; 
+            font-weight: bold; 
+            text-decoration: none; 
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>WISDOM DELIVERY SERVICE</h1>
+    <p><i>"Mutual satisfaction is our priority"</i></p>
+</header>
+
+<section class="hero">
+    <h2>Simplifiez vos livraisons à Brazzaville</h2>
+    <p>Remplissez le formulaire ci-dessous, notre call center vous rappelle immédiatement.</p>
+</section>
+
+<div class="container">
+    <div class="order-form">
+        <form id="deliveryForm">
+            <h3>📦 Demande de passage</h3>
+            
+            <label for="name">Votre Nom complet</label>
+            <input type="text" id="name" name="name" placeholder="Ex: Jean Loubaki" required>
+
+            <label for="phone">Téléphone (WhatsApp)</label>
+            <input type="tel" id="phone" name="phone" placeholder="Ex: 06 505 2176" required>
+
+            <label for="pickup">Lieu de récupération (Point A)</label>
+            <input type="text" id="pickup" name="pickup" placeholder="Quartier, Rue, N°" required>
+
+            <label for="dropoff">Lieu de livraison (Point B)</label>
+            <input type="text" id="dropoff" name="dropoff" placeholder="Quartier, Destination" required>
+
+            <label for="package">Nature du colis</label>
+            <select id="package" name="package">
+                <option value="Document">Document / Lettre</option>
+                <option value="Petit colis">Petit colis (Sac, Repas)</option>
+                <option value="Gros colis">Gros colis (Carton, Électronique)</option>
+            </select>
+
+            <label for="notes">Instructions spéciales</label>
+            <textarea id="notes" name="notes" rows="3" placeholder="Ex: Fragile, appeler à l'arrivée..."></textarea>
+
+            <button type="submit" class="btn-submit">Envoyer la demande</button>
+        </form>
+    </div>
+
+    <div class="contact-info">
+        <h3>Besoin d'aide ?</h3>
+        <p>📍 06 bis rue Loukolela Mfilou, Brazzaville</p>
+        <p>📞 <b>+242 06 505 2176</b> / <b>05 028 6124</b></p>
+    </div>
+</div>
+
+<script>
+    document.getElementById('deliveryForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Récupération des données
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const pickup = document.getElementById('pickup').value;
+        const dropoff = document.getElementById('dropoff').value;
+        const packageType = document.getElementById('package').value;
+        const notes = document.getElementById('notes').value || "Aucune"; // "Aucune" par défaut si vide
+        
+        // Création du message pour WhatsApp avec encodage des caractères
+        const message = `*NOUVELLE COMMANDE WISDOM*%0A` +
+                        `--------------------------%0A` +
+                        `*Client:* ${encodeURIComponent(name)}%0A` +
+                        `*Tél:* ${encodeURIComponent(phone)}%0A` +
+                        `*Départ:* ${encodeURIComponent(pickup)}%0A` +
+                        `*Arrivée:* ${encodeURIComponent(dropoff)}%0A` +
+                        `*Nature:* ${encodeURIComponent(packageType)}%0A` +
+                        `*Notes:* ${encodeURIComponent(notes)}`;
+        
+        // Envoi vers le numéro du call center
+        window.open(`https://wa.me/242065052176?text=${message}`, '_blank');
+    });
+</script>
+
+</body>
+</html>
